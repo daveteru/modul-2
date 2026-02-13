@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 120px;
+        width: 100%;
+        background-color: red;
+        text-align: center;
+        font-size: 12px;
+        box-sizing: border-box;
+    }
+
+    @media (min-width: 500px) and (max-width:768px) {
+        .container{
+            background-color: blue;
+        }
+    }
+
+    @media (min-width: 769px) {
+            .container{background-color: green;
+
+    }
+}
+</style>
+<body>
+    <div class="container">
+        <h1>responsive media query</h1>
+    </div>
+</body>
+</html>

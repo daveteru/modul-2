@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .navbar {
+      background-color: aquamarine;
+      display: flex;
+      justify-content: space-between;
+      height: 50px;
+      align-items: center;
+      padding: 0px 12px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 15px;
+    }
+
+    .CTA{
+        display: none;
+    }
+
+           @media  (max-width: 480px) {
+        .menu{
+            display: none;
+        }
+        .CTA{
+        display: block;
+    }
+    }
+  </style>
+  <body>
+    <div class="navbar">
+      <div class="logo">logo</div>
+      <div class="menu">
+        <a href="http://">Home</a>
+        <a href="http://">About</a>
+        <a href="http://">Service</a>
+      </div>
+      <div class="CTA"><button>Contact Us</button></div>
+    </div>
+  </body>
+</html>
