@@ -156,3 +156,9 @@ flex-direction: column;
   background-position: 240px 0px;
 }
 }
+
+.div2 .profile img,
+.div3 .profile img,
+.div5 .profile img{
+    border: 0;
+}
