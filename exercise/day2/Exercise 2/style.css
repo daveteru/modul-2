@@ -1,0 +1,158 @@
+* {
+  margin: 0px;
+}
+
+body {
+  background-color: #ecf2f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+
+.wrap {
+  height: 572px;
+  width: 1100px;
+  display: flex;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+  height: 100%;
+  width: 100%;
+}
+h5 {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+}
+h6 {
+  font-size: 11px;
+  font-weight: 500;
+  color:rgb(255, 255, 255 , 0.5);
+}
+.div1 {
+  grid-area: 1 / 1 / 2 / 3;
+  background-color: #733fc8;
+  background-image: url("“.png");
+  background-repeat: no-repeat;
+  background-position: 350px 0px;
+}
+.div2 {
+  grid-area: 1 / 3 / 2 / 4;
+  background-color: #48556a;
+}
+.div3 {
+  grid-area: 1 / 4 / 3 / 5;
+  background-color: #ffffff;
+}
+.div4 {
+  grid-area: 2 / 2 / 3 / 4;
+  background-color: #19202d;
+}
+.div5 {
+  grid-area: 2 / 1 / 3 / 2;
+  background-color: #ffffff;
+}
+
+.base {
+  border-radius: 8px;
+  padding: 32px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.15);
+}
+
+.profile {
+  width: 100%;
+  height: 28px;
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.username {
+  display: flex;
+  flex-direction: column;
+}
+
+.quote {
+  width: 100%;
+  min-height: 72px;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
+.bodytext {
+  width: 100%;
+  min-height: 90px;
+  color: #cfcfcf;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+img {
+  height: 100%;
+  border: 2px solid #a775f1;
+  border-radius: 100px;
+}
+
+.div5>.profile>.username>h5{
+    color: black;
+}
+
+.div3>.profile>.username>h5{
+    color: black;
+}
+.div5>.profile>.username>h6{
+    color: #48556A
+}
+
+.div3>.profile>.username>h6{
+    color:#48556A
+}
+
+.div5>.quote{
+    color: #48556A;
+}
+.div3>.quote{
+    color: #48556A;
+}
+.div5>.bodytext{
+    color: #48556aac;
+}
+.div3>.bodytext{
+    color: #48556aac;
+}
+
+@media (width<600px){
+    body{
+        height: auto;
+        align-items: flex-start;
+    }
+    .wrap{
+        height: auto;
+        width: 100%;
+        padding: 24px 24px;
+    }
+    .parent {
+display: flex;
+flex-direction: column;
+}
+
+.div1 {
+  background-color: #733fc8;
+  background-image: url("“.png");
+  background-repeat: no-repeat;
+  background-position: 240px 0px;
+}
+}
