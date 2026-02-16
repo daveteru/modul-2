@@ -1,0 +1,28 @@
+.sidebar{
+    width: 50vw;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.navbar{
+    display: flex;
+    gap:12px;
+    flex-direction: column;
+    margin: 24px 0px;
+}
+
+.navbar hr{
+    width: 40px;
+    height: 0px;
+    border: 1px solid white;
+}
+
+.navitems{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap:8px;
+}
