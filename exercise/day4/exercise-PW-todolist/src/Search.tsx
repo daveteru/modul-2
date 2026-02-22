@@ -8,11 +8,11 @@ interface Props {
 
 export default function Todoinput({ value, setValue, addTodo }: Props) {
   return (
-    <div className="border-b border-b-gray-300 flex items-center h-[70px] w-full px-5 justify-between">
+    <div className="border-b border-b-gray-300 flex items-center h-[70px] w-full px-5">
       <input
         type="text"
-        className={`h-full w-auto ${value ? "text-black" : "text-gray-400"} focus:outline-0`}
-        placeholder="Create a new to do..."
+        className={`h-full w-full  focus:outline-0`}
+        placeholder="Search item here"
         value={value}
         onChange={(e) => {
           setValue(e.target.value)
@@ -22,8 +22,6 @@ export default function Todoinput({ value, setValue, addTodo }: Props) {
           if (e.key === "Enter") addTodo();
         }}
       />
-      <p className="text-gray-300 italic">Press 'Enter' to add to do list
-      </p>
     </div>
   );
 }
