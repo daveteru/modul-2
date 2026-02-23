@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Todoinput from "./Todoinput";
 import Input from "./Input";
+import userContext from "./store/Context";
 
 export default function Todo() {
   const [todos, setTodos] = useState<
@@ -21,11 +22,11 @@ export default function Todo() {
     return matchFilter && matchSearch;
   });
 
-  console.table(todos)
+  const {email} = userContext();
 
   function addTodo() {
     if (value.trim() === "") return;
-    else setTodos([...todos, { id: todos.length, text: value, done: false }]);
+    else setTodos((prev)=>[...prev, { id: prev.length, text: value, done: false }]);
     setValue("");
   }
 
@@ -35,13 +36,13 @@ export default function Todo() {
         <h1 className="text-white text-[40px] tracking-wider font-bold">
           TO DO
         </h1>
-        <img className="h-[40px] " src="../img/Combined Shape.svg"></img>
+        <img className="h-[40px] " src="/img/CombinedShape.svg"></img>
       </div>
       <div className="h-[64px] mt-[16px] bg-white w-full rounded-md flex items-center overflow-hidden">
         <Todoinput value={value} setValue={setValue} addTodo={addTodo} />
       </div>
       <div className="h-[440px] mb-[25px] bg-white w-full rounded-md shadow-xl flex justify-between flex-col">
-        <div className="h-[80%] w-full over overflow-y-scroll">
+        <div className="h-[80%] w-full overflow-y-scroll">
           {filteredToDo.map((todo) => (
             <Input
               key={todo.id}
@@ -74,6 +75,7 @@ export default function Todo() {
           </button>
         </div>
       </div>
+      this is an account of {email}
     </div>
   );
 }
