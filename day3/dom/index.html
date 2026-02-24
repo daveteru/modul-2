@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body style="display: flex; width: 100%; height: 100vh; justify-content: center; align-items: center;">
+<div style="display: flex; flex-direction: column; width: 50%; text-align: center;">
+        <h1 id="ori">Original Text123</h1>
+        <button onclick="updatetext()"> Update text</button>
+        <button onclick="restoretext()"> Restore text</button>
+</div>
+<script>
+    let oritext = document.getElementById("ori")
+    function updatetext(){
+        oritext.innerText = 'Updated Text`'
+    }
+    function restoretext(){
+        oritext.innerHTML = '<h2 style="color:red;"> text </h2>'
+    }
+</script>
+</body>
+</html>

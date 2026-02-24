@@ -1,0 +1,12 @@
+react : itu adalah sebuah javascript library 
+
+framework itu ada rules dan cara pakenya gimana 
+
+react is a component based architecture
+
+react has a virtual DOM
+// kenapa lebih cepet?
+// cara kerjanya gmn?
+
+DOM : document object mdoel
+

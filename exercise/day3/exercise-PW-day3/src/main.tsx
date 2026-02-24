@@ -7,11 +7,9 @@ import HighPerformanceGlow from './HighPerformanceGlow.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <HighPerformanceGlow>
-      <div className='wrap'>
+      <div className='container wrap'>
         <Sidebar/>
         <Content/>
       </div>
-    </HighPerformanceGlow>
   </StrictMode>,
 )
