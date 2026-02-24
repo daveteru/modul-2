@@ -1,0 +1,11 @@
+*{
+    margin:0px
+}
+
+.wrap{
+    background-color: rgb(221, 221, 221);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
