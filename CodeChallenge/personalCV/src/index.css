@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+*{
+    font-family: 'inter';
+}
+
+h1{
+    color: white;
+}
+
+hr{
+    border-width: 0,1px;
+    margin: 0px;
+    padding: 0px;
+}
