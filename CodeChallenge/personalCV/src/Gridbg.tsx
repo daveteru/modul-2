@@ -8,7 +8,7 @@ export default function Gridbg() {
     trailSize={0.1}
     maxAge={550}
     interpolate={0.5}
-    color="#FFFFFF"
+    color="#CDCDCD"
     gooeyFilter={{ id: "custom-goo-filter", strength: 2 }}
 />
     </div>

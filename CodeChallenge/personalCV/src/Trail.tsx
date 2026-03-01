@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
-import React, { useMemo } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
+import React, { useMemo, useRef, useCallback } from 'react';
+import { Canvas, useThree, useFrame } from '@react-three/fiber';
 import type { CanvasProps, ThreeEvent } from '@react-three/fiber';
 import { shaderMaterial, useTrailTexture } from '@react-three/drei';
 import * as THREE from 'three';
@@ -53,24 +53,34 @@ const GooeyFilter: React.FC<GooeyFilterProps> = ({ id = 'goo-filter', strength =
   );
 };
 
+const MAX_RIPPLES = 5;
+
 const DotMaterial = shaderMaterial(
   {
     resolution: new THREE.Vector2(),
     mouseTrail: null,
     gridSize: 100,
-    pixelColor: new THREE.Color('#ffffff')
+    pixelColor: new THREE.Color('#ffffff'),
+    rippleCenters: new Array(MAX_RIPPLES).fill(null).map(() => new THREE.Vector2(-1, -1)),
+    rippleTimes: new Float32Array(MAX_RIPPLES).fill(-1.0),
+    mousePos: new THREE.Vector2(-1, -1),
+    uTime: 0.0
   },
   /* glsl vertex shader */ `
-    varying vec2 vUv;
     void main() {
       gl_Position = vec4(position.xy, 0.0, 1.0);
     }
   `,
   /* glsl fragment shader */ `
+    #define MAX_RIPPLES 5
     uniform vec2 resolution;
     uniform sampler2D mouseTrail;
     uniform float gridSize;
     uniform vec3 pixelColor;
+    uniform vec2 rippleCenters[MAX_RIPPLES];
+    uniform float rippleTimes[MAX_RIPPLES];
+    uniform vec2 mousePos;
+    uniform float uTime;
 
     vec2 coverUv(vec2 uv) {
       vec2 s = resolution.xy / max(resolution.x, resolution.y);
@@ -78,20 +88,30 @@ const DotMaterial = shaderMaterial(
       return clamp(newUv, 0.0, 1.0);
     }
 
-    float sdfCircle(vec2 p, float r) {
-        return length(p - 0.5) - r;
-    }
-
     void main() {
       vec2 screenUv = gl_FragCoord.xy / resolution;
       vec2 uv = coverUv(screenUv);
 
-      vec2 gridUv = fract(uv * gridSize);
       vec2 gridUvCenter = (floor(uv * gridSize) + 0.5) / gridSize;
 
       float trail = texture2D(mouseTrail, gridUvCenter).r;
 
-      gl_FragColor = vec4(pixelColor, trail);
+      // Accumulate all active ripples
+      float ripple = 0.0;
+      float cellSize = 1.0 / gridSize;
+      for (int i = 0; i < MAX_RIPPLES; i++) {
+        float t = rippleTimes[i];
+        if (t < 0.0 || t > 2.0) continue;
+        float dist = distance(gridUvCenter, rippleCenters[i]);
+        float radius = t * 0.35;
+        // Thin ring — 1 cell wide
+        float ring = 1.0 - smoothstep(0.0, cellSize * 0.8, abs(dist - radius));
+        float fade = 1.0 - smoothstep(0.0, 2.0, t);
+        ripple += ring * fade * 0.7;
+      }
+
+      float combined = clamp(trail + ripple, 0.0, 1.0);
+      gl_FragColor = vec4(pixelColor, combined);
     }
   `
 );
@@ -102,6 +122,9 @@ function Scene({ gridSize, trailSize, maxAge, interpolate, easingFunction, pixel
 
   const dotMaterial = useMemo(() => new DotMaterial(), []);
   dotMaterial.uniforms.pixelColor.value = new THREE.Color(pixelColor);
+
+  const rippleIndexRef = useRef(0);
+  const rippleTimesRef = useRef(new Float32Array(MAX_RIPPLES).fill(-1.0));
 
   const [trail, onMove] = useTrailTexture({
     size: 512,
@@ -120,8 +143,32 @@ function Scene({ gridSize, trailSize, maxAge, interpolate, easingFunction, pixel
 
   const scale = Math.max(viewport.width, viewport.height) / 2;
 
+  const onClick = useCallback((e: ThreeEvent<PointerEvent>) => {
+    const x = (e.point.x / scale + 1) * 0.5;
+    const y = (e.point.y / scale + 1) * 0.5;
+    const sx = size.width / Math.max(size.width, size.height);
+    const sy = size.height / Math.max(size.width, size.height);
+    const uvX = (x - 0.5) * sx + 0.5;
+    const uvY = (y - 0.5) * sy + 0.5;
+    // Cycle through ripple slots
+    const idx = rippleIndexRef.current % MAX_RIPPLES;
+    dotMaterial.uniforms.rippleCenters.value[idx].set(uvX, uvY);
+    rippleTimesRef.current[idx] = 0.0;
+    rippleIndexRef.current++;
+  }, [scale, size, dotMaterial]);
+
+  useFrame((_, delta) => {
+    const times = rippleTimesRef.current;
+    for (let i = 0; i < MAX_RIPPLES; i++) {
+      if (times[i] >= 0.0 && times[i] <= 2.0) {
+        times[i] += delta;
+      }
+    }
+    dotMaterial.uniforms.rippleTimes.value = times;
+  });
+
   return (
-    <mesh scale={[scale, scale, 1]} onPointerMove={onMove}>
+    <mesh scale={[scale, scale, 1]} onPointerMove={onMove} onClick={onClick}>
       <planeGeometry args={[2, 2]} />
       <primitive
         object={dotMaterial}
