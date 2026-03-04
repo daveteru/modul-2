@@ -6,7 +6,7 @@ export default function Contact() {
           <hr></hr>06
         </p>
         <span className="text-9xl font-extralight mb-4">CONTACT</span>
-        <div className="flex gap-4 mb-90">
+        <div className="flex gap-4">
           <div className="flex flex-col items-end gap-3 ">
             <h1 className="uppercase max-w-[400px] min-w-[300px]">
               I design with intent and build with craft // visual designer
@@ -28,6 +28,34 @@ export default function Contact() {
             Explicabo aspernatur quod fuga nobis nihil. Blanditiis provident
           </p>
         </div>
+        <form>
+          <fieldset className="flex flex-col items-end gap-2">
+            <legend>SEND ME A MESSAGE:</legend>
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="border rounded-md h-10 w-100 pointer-events-auto"
+            ></input>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="border rounded-md h-10 w-100 pointer-events-auto"
+            ></input>
+            <label htmlFor="message">Message:</label>
+            <textarea
+              id="message"
+              name="message"
+              className="border rounded-md h-70 w-100 pointer-events-auto"
+            ></textarea>
+            <button className="bg-white w-fit py-1 px-3 rounded-full text-black hover:bg-blue-700 hover:text-white pointer-events-auto">
+              SEND INQUIRY
+            </button>
+          </fieldset>
+        </form>
       </div>
       <hr className="relative z-1 w-full border-t border-gray-500  mix-blend-difference" />
     </div>
