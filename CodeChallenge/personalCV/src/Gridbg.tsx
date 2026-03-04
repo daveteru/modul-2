@@ -2,9 +2,9 @@ import PixelTrail from "./Trail";
 
 export default function Gridbg() {
   return (
-    <div className="absolute inset-0 min-h-screen h-auto bg-[#212121]">
+    <div className="fixed inset-0 h-full bg-[#212121]">
   <PixelTrail
-    gridSize={45}
+    gridSize={25}
     trailSize={0.1}
     maxAge={550}
     interpolate={0.5}

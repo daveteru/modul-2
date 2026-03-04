@@ -1,12 +1,12 @@
-export default function About() {
+export default function Contact() {
   return (
     <div>
       <div className="relative z-5 flex flex-col items-end w-full h-fit text-right text-white mix-blend-difference pointer-events-none mb-10 mt-5">
         <p>
-          <hr></hr>01
+          <hr></hr>06
         </p>
-        <span className="text-9xl font-extralight mb-4">ABOUT</span>
-        <div className="flex gap-4">
+        <span className="text-9xl font-extralight mb-4">CONTACT</span>
+        <div className="flex gap-4 mb-90">
           <div className="flex flex-col items-end gap-3 ">
             <h1 className="uppercase max-w-[400px] min-w-[300px]">
               I design with intent and build with craft // visual designer
@@ -28,14 +28,6 @@ export default function About() {
             Explicabo aspernatur quod fuga nobis nihil. Blanditiis provident
           </p>
         </div>
-        <ul>
-          <li>JAVASCRIPT + TYPESCRIPT </li>
-          <li>FRONT END DEVELOPMENT</li>
-          <li>BACKEND END DEVELOPMENT</li>
-          <li>UI/UX DESIGN</li>
-          <li>BRAND IDENTITY DESIGN</li>
-          <li>DESIGN SYSTEM</li>
-        </ul>
       </div>
       <hr className="relative z-1 w-full border-t border-gray-500  mix-blend-difference" />
     </div>

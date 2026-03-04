@@ -1,8 +1,8 @@
 export default function Title() {
   return (
-    <div className="sticky top-5 z-10 h-fit w-fit pointer-events-none mix-blend-difference">
+    <div className="fixed top-5 left-5 z-15 h-fit w-fit pointer-events-none mix-blend-difference">
       <h1 className="text-6xl flex flex-wrap h-fit w-[50px] ">
-        DAVID 'TERU' SUDIONO
+        DAVID <span >'TERU'</span> SUDIONO
       </h1>
       <p className="h-fit w-[300px] flex flex-wrap text-white">
         INDEPENDENT UI DESIGNER & FULL STACK DEVELOPER SPECIALIZING IN

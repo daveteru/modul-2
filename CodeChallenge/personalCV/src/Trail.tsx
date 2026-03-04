@@ -144,18 +144,16 @@ function Scene({ gridSize, trailSize, maxAge, interpolate, easingFunction, pixel
   const scale = Math.max(viewport.width, viewport.height) / 2;
 
   const onClick = useCallback((e: ThreeEvent<PointerEvent>) => {
-    const x = (e.point.x / scale + 1) * 0.5;
-    const y = (e.point.y / scale + 1) * 0.5;
+    if (!e.uv) return;
     const sx = size.width / Math.max(size.width, size.height);
     const sy = size.height / Math.max(size.width, size.height);
-    const uvX = (x - 0.5) * sx + 0.5;
-    const uvY = (y - 0.5) * sy + 0.5;
-    // Cycle through ripple slots
+    const uvX = (e.uv.x - 0.5) * sx + 0.5;
+    const uvY = (e.uv.y - 0.5) * sy + 0.5;
     const idx = rippleIndexRef.current % MAX_RIPPLES;
     dotMaterial.uniforms.rippleCenters.value[idx].set(uvX, uvY);
     rippleTimesRef.current[idx] = 0.0;
     rippleIndexRef.current++;
-  }, [scale, size, dotMaterial]);
+  }, [size, dotMaterial]);
 
   useFrame((_, delta) => {
     const times = rippleTimesRef.current;
