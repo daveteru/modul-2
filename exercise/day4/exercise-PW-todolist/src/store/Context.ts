@@ -9,7 +9,7 @@ interface UserState{
 }
 
 const userContext = create<UserState>((set, get)=>({
-    email: ``,
+    email: `teru`,
     password : '1234',
     isLoggedIn:false,
     setEmail: (email) => set({ email }),
